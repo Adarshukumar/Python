@@ -1,0 +1,28 @@
+on: [pull_request]
+
+permissions:
+  contents: read
+  pull-requests: read
+  checks: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Write git diff to temp file
+      run: |
+        git fetch origin
+        git diff origin/${{ github.base_ref }} *.md translations/*/*.md \
+        | sed -n '/^+/p' | sed '/^+++/d' | sed 's/^+//' \
+        > ${{ runner.temp }}/diff.md
+    - name: Output diff
+      run: cat ${{ runner.temp }}/diff.md
+    - name: Check diff with markdownlint
+      uses: DavidAnson/markdownlint-cli2-action@v17
+      with:
+        globs: "${{ runner.temp }}/diff.md"

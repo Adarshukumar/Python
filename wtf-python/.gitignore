@@ -1,0 +1,20 @@
+.DS_Store
+
+node_modules
+npm-debug.log
+
+# Python-specific byte-compiled files should be ignored
+__pycache__/
+*.py[cod]
+*$py.class
+
+irrelevant/.ipynb_checkpoints/
+
+irrelevant/.python-version
+
+.idea/
+.vscode/
+
+# Virtual envitonments
+venv/
+.venv/
