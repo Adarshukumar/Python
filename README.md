@@ -137,3 +137,4 @@ Nothing complicated — Python 3 installed is all you need. ✅
 ![Made with ❤️ and Python](https://img.shields.io/badge/Made_with-❤️_and_Python-red?style=flat-square)
 
 </div>
+
